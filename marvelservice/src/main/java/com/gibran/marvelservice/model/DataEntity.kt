@@ -11,5 +11,4 @@ data class DataEntity(
     val collectionURI: String,
     val items: List<Item>,
     val returned: Int
-) : Parcelable {
-}
+) : Parcelable
