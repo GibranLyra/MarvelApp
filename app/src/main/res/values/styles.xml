@@ -1,0 +1,17 @@
+<resources>
+
+    <style name="Widget.AppCompat.Button.Borderless.Colored.Accent" parent="Widget.AppCompat.Button.Borderless.Colored">
+        <item name="android:textColor">@color/tintColor</item>
+    </style>
+
+    <style name="TextAppearance.AppCompat.Spotlight" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/text_spotlight_color</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="TextAppearance.AppCompat.SecondarySpotlight" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/text_secondary_spotlight_color</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+</resources>

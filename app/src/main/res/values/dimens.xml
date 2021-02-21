@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="large_margin">30dp</dimen>
+    <dimen name="small_margin">16dp</dimen>
+    <dimen name="tiny_margin">8dp</dimen>
+    <dimen name="medium_margin">24dp</dimen>
+    <dimen name="main_fragment_root_layout_padding_top">72dp</dimen>
+    <dimen name="xxlarge_margin">80dp</dimen>
+</resources>

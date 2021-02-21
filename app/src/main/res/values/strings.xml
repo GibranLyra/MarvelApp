@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">MarvelApp</string>
+    <string name="try_again">Retry</string>
+    <string name="counters_error_title_message">Couldn’t load heroes</string>
+    <string name="no_internet_message">The Internet connection appears to be offline.</string>
+    <string name="empty_heroes_title_message">No heroes</string>
+    <string name="no_results">No Results</string>
+    <string name="actions_ok">ok</string>
+    <string name="empty_hero_detail_message">Check again later.</string>
+    <string name="search_heroes">Search Heroes</string>
 </resources>
