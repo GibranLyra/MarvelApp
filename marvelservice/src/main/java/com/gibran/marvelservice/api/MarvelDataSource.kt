@@ -4,5 +4,5 @@ import com.gibran.marvelservice.model.Hero
 import io.reactivex.Single
 
 interface MarvelDataSource {
-    fun heroes(): Single<Hero>
+    fun heroes(): Single<List<Hero>>
 }
