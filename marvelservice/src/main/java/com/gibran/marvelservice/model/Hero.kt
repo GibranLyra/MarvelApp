@@ -1,15 +1,34 @@
 package com.gibran.marvelservice.model
 
+import android.os.Parcelable
+import androidx.room.Embedded
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import kotlinx.android.parcel.Parcelize
+import kotlinx.serialization.Serializable
+
+@Entity(tableName = Hero.TABLE_NAME)
+@Parcelize
+@Serializable
 data class Hero(
-    val comics: Comics,
+    @Embedded(prefix = "comics")
+    val comics: DataEntity,
     val description: String,
-    val events: Events,
+    @Embedded(prefix = "events")
+    val events: DataEntity,
+    @PrimaryKey
     val id: Int,
     val modified: String,
     val name: String,
     val resourceURI: String,
-    val series: Series,
-    val stories: Stories,
-    val thumbnail: Thumbnail,
-    val urls: List<Url>
-)
+    @Embedded(prefix = "series")
+    val series: DataEntity,
+    @Embedded(prefix = "stories")
+    val stories: DataEntity,
+    @Embedded
+    val thumbnail: Thumbnail
+) : Parcelable {
+    companion object {
+        internal const val TABLE_NAME = "heroes"
+    }
+}

@@ -8,19 +8,19 @@
     tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
 
     <TextView
-        android:id="@+id/emptyCounterTitleMessage"
+        android:id="@+id/emptyHeroTitleMessage"
         style="@style/TextAppearance.AppCompat.Large"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/counters_error_title_message"
-        app:layout_constraintBottom_toTopOf="@+id/emptyCounterDetailMessage"
+        app:layout_constraintBottom_toTopOf="@+id/emptyHeroDetailMessage"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="packed" />
 
     <TextView
-        android:id="@+id/emptyCounterDetailMessage"
+        android:id="@+id/emptyHeroDetailMessage"
         style="@style/TextAppearance.AppCompat.Medium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -29,7 +29,7 @@
         app:layout_constraintBottom_toTopOf="@+id/tryAgainButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/emptyCounterTitleMessage" />
+        app:layout_constraintTop_toBottomOf="@+id/emptyHeroTitleMessage" />
 
     <Button
         android:id="@+id/tryAgainButton"
@@ -41,5 +41,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/emptyCounterDetailMessage" />
+        app:layout_constraintTop_toBottomOf="@+id/emptyHeroDetailMessage" />
 </androidx.constraintlayout.widget.ConstraintLayout>
