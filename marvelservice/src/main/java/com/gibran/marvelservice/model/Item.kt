@@ -10,7 +10,8 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class Item(
     val name: String,
-    val resourceURI: String
+    val resourceURI: String,
+    val type: String? = ""
 ) : Parcelable {
     companion object {
         internal const val TABLE_NAME = "item"

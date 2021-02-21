@@ -1,7 +1,11 @@
 package com.gibran.marvelapp.ui.screen.main
 
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.core.view.isVisible
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import com.gibran.marvelapp.R
 import com.gibran.marvelapp.databinding.MainFragmentBinding
@@ -11,10 +15,6 @@ import com.gibran.marvelservice.model.Hero
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainFragment : Fragment(R.layout.main_fragment) {
-
-    companion object {
-        fun newInstance() = MainFragment()
-    }
 
     private val viewModel by viewModel<MainViewModel>()
 
@@ -35,6 +35,41 @@ class MainFragment : Fragment(R.layout.main_fragment) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initViewModel()
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = MainFragmentBinding.inflate(inflater, container, false)
+        initViews()
+        return binding.root
+    }
+
+    private fun initViews() {
+        viewModel.fetchHeroes()
+        with(binding) {
+            errorLayout.tryAgainButton.setOnClickListener { viewModel.fetchHeroes() }
+            swipeToRefresh.setOnRefreshListener { viewModel.fetchHeroes() }
+            searchBar.setOnFocusChangeListener { _, hasFocus -> showSearchMode(hasFocus) }
+            setupSearchMode()
+        }
+    }
+
+    private fun showSearchMode(isInSearchMode: Boolean) {
+        if (isInSearchMode.not()) {
+            binding.searchBar.clearFocus()
+        }
+    }
+
+    private fun setupSearchMode() {
+        binding.searchBar.addTextChangedListener {
+            if (viewModel.hasHeroes()) {
+                setFilteredHeroes(it.toString())
+                showFilteredHeroes()
+            }
+        }
     }
 
     private fun initViewModel() {

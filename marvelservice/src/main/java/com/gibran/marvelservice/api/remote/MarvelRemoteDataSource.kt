@@ -10,6 +10,7 @@ import timber.log.Timber
 class MarvelRemoteDataSource(private val service: MarvelService) : MarvelDataSource {
     override fun heroes(): Single<List<Hero>> {
         return service.heroes()
+            .map { it.data.results }
             .doOnError { Timber.e(it, "heroes: %s", it.message) }
     }
 

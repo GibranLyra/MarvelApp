@@ -1,12 +1,12 @@
 package com.gibran.marvelservice.api
 
+import com.gibran.marvelservice.api.local.HeroDatabaseDataSource
 import com.gibran.marvelservice.model.Hero
-import io.reactivex.Completable
 import io.reactivex.Single
 
 class MarvelRepository(
     private val remoteRepo: MarvelDataSource,
-    private val localRepo: MarvelDataSource
+    private val localRepo: HeroDatabaseDataSource
 ) : MarvelDataSource {
 
     var cachedHeroes: LinkedHashMap<Int, Hero> = LinkedHashMap()
@@ -60,8 +60,6 @@ class MarvelRepository(
         cacheIsDirty = false
     }
 
-    private fun refreshLocalDataSource(heroes: List<Hero>): Completable {
-        //TODO
-        return Completable.complete()
-    }
+    private fun refreshLocalDataSource(heroes: List<Hero>) = localRepo.heroDao()
+        .saveCounters(heroes)
 }

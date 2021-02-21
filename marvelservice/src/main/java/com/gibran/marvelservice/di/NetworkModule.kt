@@ -3,6 +3,7 @@ package com.gibran.marvelservice.di
 import androidx.annotation.VisibleForTesting
 import androidx.annotation.VisibleForTesting.PRIVATE
 import com.gibran.marvelservice.api.remote.MarvelService
+import com.gibran.marvelservice.util.MarvelKey
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
@@ -14,10 +15,11 @@ import retrofit2.CallAdapter
 import retrofit2.Converter
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
+import java.util.*
 import java.util.concurrent.TimeUnit
 
 private const val TIME_OUT = 20L
-private const val BASE_URL = "http://192.168.15.2:3000/api/v1/"
+private const val BASE_URL = "https://gateway.marvel.com:443/"
 
 @ExperimentalSerializationApi
 object NetworkModule {
@@ -36,7 +38,9 @@ object NetworkModule {
 
     private fun provideConverterFactory(): Converter.Factory {
         val contentType = "application/json".toMediaType()
-        return Json.asConverterFactory(contentType)
+        return Json {
+           ignoreUnknownKeys = true
+        }.asConverterFactory(contentType)
     }
 
     @ExperimentalSerializationApi
@@ -56,6 +60,22 @@ object NetworkModule {
     private fun provideOkHttpClient(loggingInterceptor: HttpLoggingInterceptor): OkHttpClient {
         return OkHttpClient()
             .newBuilder()
+            .addInterceptor { chain ->
+                val original = chain.request()
+
+                val currentTime = Date().time.toString()
+                val publicKey = "468470cb48e5cf4f799c5e456d618593"
+                val privateKey = "565fa3c1089c866b4adf453dd79b54319f4bd454"
+
+                val url = original.url.newBuilder()
+                    .addQueryParameter("ts", currentTime)
+                    .addQueryParameter("apikey", publicKey)
+                    .addQueryParameter("hash", MarvelKey.generateUserKey(currentTime, privateKey, publicKey))
+                    .build()
+                val requestBuilder = original.newBuilder().url(url)
+                val request = requestBuilder.build()
+                chain.proceed(request)
+            }
             .addInterceptor(loggingInterceptor)
             .readTimeout(TIME_OUT, TimeUnit.SECONDS)
             .connectTimeout(TIME_OUT, TimeUnit.SECONDS)
