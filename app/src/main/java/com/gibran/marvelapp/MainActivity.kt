@@ -2,7 +2,7 @@ package com.gibran.marvelapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.gibran.marvelapp.ui.main.MainFragment
+import com.gibran.marvelapp.ui.screen.main.MainFragment
 
 class MainActivity : AppCompatActivity() {
 

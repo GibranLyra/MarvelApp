@@ -1,2 +1,3 @@
+include ':marvelservice'
 include ':app'
 rootProject.name = "MarvelApp"
