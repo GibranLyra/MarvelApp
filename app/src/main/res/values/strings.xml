@@ -8,4 +8,5 @@
     <string name="actions_ok">ok</string>
     <string name="empty_hero_detail_message">Check again later.</string>
     <string name="search_heroes">Search Heroes</string>
+    <string name="hero_image_cd">Hero Image</string>
 </resources>

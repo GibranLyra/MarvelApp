@@ -1,12 +1,14 @@
 package com.gibran.marvelapp.ui.component.hero
 
+import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.gibran.marvelapp.databinding.HeroItemBinding
 import com.gibran.marvelservice.model.Hero
 
 class HeroListAdapter(
-    onClick: (item: Hero) -> Unit
+    private val onClick: (item: Hero) -> Unit
 ) : RecyclerView.Adapter<HeroListItemViewHolder>() {
     var heroes = mutableListOf<Hero>()
         set(value) {
@@ -20,15 +22,25 @@ class HeroListAdapter(
         parent: ViewGroup,
         viewType: Int
     ): HeroListItemViewHolder {
-        TODO("Not yet implemented")
+        return HeroListItemViewHolder(
+            HeroItemBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+        )
     }
 
     override fun onBindViewHolder(holder: HeroListItemViewHolder, position: Int) {
-        TODO("Not yet implemented")
+        setupClickListeners(holder, position)
+        holder.bind(heroes[position])
     }
 
-    override fun getItemCount(): Int {
-        TODO("Not yet implemented")
+    private fun setupClickListeners(holder: HeroListItemViewHolder, position: Int) {
+        holder.itemView.setOnClickListener {
+            onClick.invoke(heroes[position])
+        }
     }
 
+    override fun getItemCount() = heroes.size
 }
