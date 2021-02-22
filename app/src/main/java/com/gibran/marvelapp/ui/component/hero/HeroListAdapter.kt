@@ -45,6 +45,14 @@ class HeroListAdapter(
             }
     }
 
+    fun remove(hero: Hero) {
+        heroes.indexOfFirst { it.id == hero.id }
+            .let {
+                heroes.removeAt(it)
+                notifyItemRemoved(it)
+            }
+    }
+
     private fun setupClickListeners(holder: HeroListItemViewHolder, position: Int) {
         holder.itemView.setOnClickListener {
             onClick.invoke(heroes[position])
@@ -52,5 +60,7 @@ class HeroListAdapter(
     }
 
     override fun getItemCount() = heroes.size
+
+
 
 }

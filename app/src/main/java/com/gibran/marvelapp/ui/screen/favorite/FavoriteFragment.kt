@@ -88,7 +88,7 @@ class FavoriteFragment : Fragment(R.layout.favorite_fragment) {
     }
 
     private fun showIsFavorited(hero: Hero) {
-        adapter.isFavorited(hero)
+        adapter.remove(hero)
     }
 
     private fun showFavoriteError(action: (() -> Unit)? = null) {

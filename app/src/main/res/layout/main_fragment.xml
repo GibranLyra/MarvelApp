@@ -64,7 +64,7 @@
                 android:id="@+id/heroesRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_marginTop="@dimen/medium_margin"
+                android:layout_marginBottom="@dimen/bottom_bar_size"
                 android:visibility="gone"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintBottom_toBottomOf="parent"
