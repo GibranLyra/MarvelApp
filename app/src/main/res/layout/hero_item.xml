@@ -14,11 +14,11 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp">
+        android:layout_height="@dimen/hero_card_height">
 
         <ImageView
             android:id="@+id/heroAvatar"
-            android:layout_width="70dp"
+            android:layout_width="@dimen/hero_avatar_width"
             android:layout_height="match_parent"
             android:contentDescription="@string/hero_image_cd"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -36,10 +36,25 @@
             android:ellipsize="end"
             android:maxLines="2"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/heroFavoriteButton"
             app:layout_constraintStart_toEndOf="@+id/heroAvatar"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Hero Name" />
+
+        <ImageButton
+            android:id="@+id/heroFavoriteButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/small_margin"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/favorite_hero_button_cd"
+            android:padding="@dimen/small_padding"
+            android:src="@drawable/ic_favorite_filled"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1"
+            app:layout_constraintStart_toEndOf="@+id/heroName"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

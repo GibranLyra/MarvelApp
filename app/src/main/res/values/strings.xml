@@ -9,4 +9,5 @@
     <string name="empty_hero_detail_message">Check again later.</string>
     <string name="search_heroes">Search Heroes</string>
     <string name="hero_image_cd">Hero Image</string>
+    <string name="favorite_hero_button_cd">Favorite Hero Button</string>
 </resources>
