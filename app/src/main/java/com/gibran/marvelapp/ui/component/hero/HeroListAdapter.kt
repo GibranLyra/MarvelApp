@@ -8,7 +8,8 @@ import com.gibran.marvelapp.databinding.HeroItemBinding
 import com.gibran.marvelservice.model.Hero
 
 class HeroListAdapter(
-    private val onClick: (item: Hero) -> Unit
+    private val onClick: (item: Hero) -> Unit,
+    private val onFavoriteClick: (hero: Hero) -> Unit
 ) : RecyclerView.Adapter<HeroListItemViewHolder>() {
     var heroes = mutableListOf<Hero>()
         set(value) {
@@ -33,7 +34,15 @@ class HeroListAdapter(
 
     override fun onBindViewHolder(holder: HeroListItemViewHolder, position: Int) {
         setupClickListeners(holder, position)
-        holder.bind(heroes[position])
+        holder.bind(heroes[position], onFavoriteClick)
+    }
+
+    fun isFavorited(hero: Hero) {
+        heroes.indexOfFirst { it.id == hero.id }
+            .let {
+                heroes[it] = hero
+                notifyItemChanged(it)
+            }
     }
 
     private fun setupClickListeners(holder: HeroListItemViewHolder, position: Int) {
@@ -43,4 +52,5 @@ class HeroListAdapter(
     }
 
     override fun getItemCount() = heroes.size
+
 }

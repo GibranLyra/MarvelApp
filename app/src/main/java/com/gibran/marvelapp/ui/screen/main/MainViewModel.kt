@@ -17,6 +17,9 @@ internal class MainViewModel(
     private val heroesData = MutableLiveData<ResultState<List<Hero>>>()
     val heroes: LiveData<ResultState<List<Hero>>> = heroesData
 
+    private val favoriteData = MutableLiveData<ResultState<Hero>>()
+    val favoriteStatus: LiveData<ResultState<Hero>> = favoriteData
+
     internal fun fetchHeroes() {
         marvelHeroesUseCase.fetchHeroes()
             .defaultSchedulers()
@@ -24,7 +27,7 @@ internal class MainViewModel(
             .subscribe { result, _ ->
                 when (result) {
                     is ResultState.Success -> heroesData.value = result
-                    is ResultState.Error.RecoverableError -> heroesData.value = result
+                    is ResultState.Error.RecoverableError,
                     is ResultState.Error.NonRecoverableError -> heroesData.value = result
                     ResultState.Loading -> heroesData.value = result
                 }
@@ -45,5 +48,19 @@ internal class MainViewModel(
             is ResultState.Success -> (heroes.value as ResultState.Success<List<Hero>>).data
             else -> listOf()
         }
+    }
+
+    fun favoriteHero(hero: Hero) {
+        marvelHeroesUseCase.favoriteHero(hero)
+            .defaultSchedulers()
+            .subscribe { result, _ ->
+                when (result) {
+                    is ResultState.Success -> favoriteData.value = result
+                    is ResultState.Error.RecoverableError,
+                    is ResultState.Error.NonRecoverableError -> favoriteData.value = result
+                    ResultState.Loading -> favoriteData.value = result
+                }
+            }
+            .run { disposables.add(this) }
     }
 }

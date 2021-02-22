@@ -12,7 +12,7 @@
         style="@style/TextAppearance.AppCompat.Large"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/counters_error_title_message"
+        android:text="@string/heroes_error_title_message"
         app:layout_constraintBottom_toTopOf="@+id/emptyHeroDetailMessage"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

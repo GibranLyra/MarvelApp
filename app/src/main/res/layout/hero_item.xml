@@ -49,12 +49,12 @@
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="@string/favorite_hero_button_cd"
             android:padding="@dimen/small_padding"
-            android:src="@drawable/ic_favorite_filled"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1"
             app:layout_constraintStart_toEndOf="@+id/heroName"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/ic_favorite_filled" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

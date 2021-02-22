@@ -12,6 +12,7 @@ import com.gibran.marvelapp.databinding.MainFragmentBinding
 import com.gibran.marvelapp.ui.component.hero.HeroListAdapter
 import com.gibran.marvelapp.util.ResultState
 import com.gibran.marvelservice.model.Hero
+import com.google.android.material.snackbar.Snackbar
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainFragment : Fragment(R.layout.main_fragment) {
@@ -27,7 +28,7 @@ class MainFragment : Fragment(R.layout.main_fragment) {
 
     private val adapter by lazy {
         HeroListAdapter(
-            onClick()
+            onClick(), onFavoriteClick()
         )
     }
 
@@ -96,7 +97,32 @@ class MainFragment : Fragment(R.layout.main_fragment) {
                     }
                 }
             })
+
+            favoriteStatus.observe(this@MainFragment, { result ->
+                when (result) {
+                    is ResultState.Error.NonRecoverableError -> showFavoriteError()
+                    is ResultState.Error.RecoverableError -> showFavoriteError(result.action)
+                    ResultState.Loading -> {
+                        //Do Nothing
+                    }
+                    is ResultState.Success -> showIsFavorited(result.data)
+                }
+            })
         }
+    }
+
+    private fun showIsFavorited(hero: Hero) {
+        adapter.isFavorited(hero)
+    }
+
+    private fun showFavoriteError(action: (() -> Unit)? = null) {
+        Snackbar.make(
+            binding.mainContainer,
+            getString(R.string.favorite_hero_error_message),
+            Snackbar.LENGTH_SHORT
+        ).setAction(R.string.try_again) {
+            action?.invoke()
+        }.show()
     }
 
     private fun setupRecyclerView() {
@@ -108,6 +134,10 @@ class MainFragment : Fragment(R.layout.main_fragment) {
 
     private fun onClick(): (item: Hero) -> Unit = {
         //TODO
+    }
+
+    private fun onFavoriteClick(): (hero: Hero) -> Unit = {
+        viewModel.favoriteHero(it)
     }
 
     private fun showLoading() {
@@ -155,9 +185,8 @@ class MainFragment : Fragment(R.layout.main_fragment) {
 
     private fun setFilteredHeroes(query: String) {
         val filteredHeroes = viewModel.getLoadedHeroes()
-            .filter { counter ->
-                counter.name.contains(query, true)
-            }.toMutableList()
+            .filter { hero -> hero.name.contains(query, true) }
+            .toMutableList()
         adapter.heroes = filteredHeroes
     }
 

@@ -27,7 +27,8 @@ data class Hero(
     @Embedded(prefix = "stories")
     val stories: DataEntity,
     @Embedded
-    val thumbnail: Thumbnail
+    val thumbnail: Thumbnail,
+    val isFavorited: Boolean = false,
 ) : Parcelable {
     companion object {
         internal const val TABLE_NAME = "heroes"

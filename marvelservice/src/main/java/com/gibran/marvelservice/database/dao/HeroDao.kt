@@ -1,9 +1,6 @@
 package com.gibran.marvelservice.database.dao
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.gibran.marvelservice.model.Hero
 import io.reactivex.Completable
 import io.reactivex.Single
@@ -14,7 +11,10 @@ interface HeroDao {
     @Query("SELECT * FROM ${Hero.TABLE_NAME}")
     fun heroes(): Single<List<Hero>>
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun saveCounters(counter: List<Hero>): Completable
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    fun saveHeroes(counter: List<Hero>): Completable
+
+    @Update
+    fun favoriteHero(hero: Hero): Completable
 
 }

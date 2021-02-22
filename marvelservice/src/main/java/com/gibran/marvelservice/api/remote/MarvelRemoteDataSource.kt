@@ -13,5 +13,4 @@ class MarvelRemoteDataSource(private val service: MarvelService) : MarvelDataSou
             .map { it.data.results }
             .doOnError { Timber.e(it, "heroes: %s", it.message) }
     }
-
 }
