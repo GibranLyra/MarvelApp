@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.gibran.marvelapp.R
 import com.gibran.marvelapp.databinding.MainFragmentBinding
 import com.gibran.marvelapp.ui.component.hero.HeroListAdapter
@@ -133,7 +134,8 @@ class MainFragment : Fragment(R.layout.main_fragment) {
     }
 
     private fun onClick(): (item: Hero) -> Unit = {
-        //TODO
+        val action = MainFragmentDirections.mainFragmentToHeroDetail(it)
+        findNavController().navigate(action)
     }
 
     private fun onFavoriteClick(): (hero: Hero) -> Unit = {

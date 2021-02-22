@@ -18,6 +18,15 @@
             app:exitAnim="@animator/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@animator/nav_default_pop_exit_anim" />
+
+        <action
+            android:id="@+id/mainFragmentToHeroDetail"
+            app:destination="@id/heroDetailsFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@animator/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@animator/nav_default_pop_exit_anim" />
+
     </fragment>
 
     <fragment
@@ -33,5 +42,26 @@
             app:exitAnim="@animator/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@animator/nav_default_pop_exit_anim" />
+
+        <action
+            android:id="@+id/favoriteFragmentToHeroDetail"
+            app:destination="@id/heroDetailsFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@animator/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@animator/nav_default_pop_exit_anim" />
+
     </fragment>
+
+    <fragment
+        android:id="@+id/heroDetailsFragment"
+        android:name="com.gibran.marvelapp.ui.screen.herodetail.HeroDetailFragment"
+        android:label="hero_details_fragment"
+        tools:layout="@layout/hero_detail_fragment">
+
+        <argument
+            android:name="hero_args"
+            app:argType="com.gibran.marvelservice.model.Hero"/>
+    </fragment>
+
 </navigation>
