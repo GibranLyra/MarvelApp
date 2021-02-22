@@ -11,4 +11,5 @@
     <string name="hero_image_cd">Hero Image</string>
     <string name="favorite_hero_button_cd">Favorite Hero Button</string>
     <string name="favorite_hero_error_message">Não foi possível favoritar o herói</string>
+    <string name="heros">Home</string>
 </resources>
