@@ -1,34 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/heroContainer"
+    android:id="@+id/storeAvatarCardRootView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?attr/selectableItemBackground"
+    android:layout_marginHorizontal="@dimen/small_margin"
+    android:layout_marginVertical="@dimen/tiny_margin"
     android:clickable="true"
     android:focusable="true"
-    android:orientation="horizontal">
+    android:foreground="?attr/selectableItemBackground"
+    app:cardCornerRadius="@dimen/border_radius_light">
 
-    <ImageView
-        android:id="@+id/heroAvatar"
-        android:layout_width="@dimen/hero_image_size"
-        android:layout_height="@dimen/hero_image_size"
-        android:layout_gravity="center"
-        android:layout_margin="@dimen/tiny_margin"
-        android:contentDescription="@string/hero_image_cd" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_marginLeft="@dimen/small_margin"
-        android:layout_marginRight="@dimen/small_margin"
-        android:orientation="vertical">
+        <ImageView
+            android:id="@+id/heroAvatar"
+            android:layout_width="70dp"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/hero_image_cd"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/heroName"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/ic_android" />
 
         <TextView
             android:id="@+id/heroName"
-            android:layout_width="match_parent"
+            style="@style/TextAppearance.AppCompat.Medium"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            tools:text="Thor" />
-    </LinearLayout>
-</LinearLayout>
+            android:layout_marginStart="@dimen/small_margin"
+            android:ellipsize="end"
+            android:maxLines="2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/heroAvatar"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Hero Name" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

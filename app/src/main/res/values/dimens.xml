@@ -7,4 +7,6 @@
     <dimen name="main_fragment_root_layout_padding_top">72dp</dimen>
     <dimen name="xxlarge_margin">80dp</dimen>
     <dimen name="hero_image_size">100dp</dimen>
+    <dimen name="tiny_padding">2dp</dimen>
+    <dimen name="border_radius_light">4dp</dimen>
 </resources>
