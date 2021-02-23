@@ -55,6 +55,9 @@ class MarvelRepository(
         return localRepo.favoriteHero(hero)
     }
 
+    override fun heroDetails(hero: Hero) = remoteRepo.heroDetails(hero)
+        .map { it.copy(isFavorited = hero.isFavorited) }
+
     private fun refreshMemoryCache(heroes: List<Hero>) {
         cachedHeroes.clear()
         heroes.forEachIndexed { index, counter ->

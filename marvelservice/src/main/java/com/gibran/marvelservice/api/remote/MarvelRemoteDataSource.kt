@@ -13,4 +13,10 @@ class MarvelRemoteDataSource(private val service: MarvelService) : MarvelDataSou
             .map { it.data.results }
             .doOnError { Timber.e(it, "heroes: %s", it.message) }
     }
+
+    override fun heroDetails(hero: Hero): Single<Hero> {
+        return service.heroDetails(hero.id)
+            .map { it.data.results.first() }
+            .doOnError { Timber.e(it, "heroDetails: %s", it.message) }
+    }
 }

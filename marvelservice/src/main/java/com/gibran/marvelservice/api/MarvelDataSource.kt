@@ -6,5 +6,6 @@ import io.reactivex.Single
 
 interface MarvelDataSource {
     fun heroes(): Single<List<Hero>>
-    fun favoriteHero(hero: Hero)= Completable.complete()
+    fun favoriteHero(hero: Hero) = Completable.complete()
+    fun heroDetails(hero: Hero): Single<Hero> = Single.error(NotImplementedError())
 }

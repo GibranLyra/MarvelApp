@@ -12,4 +12,6 @@
     <string name="favorite_hero_button_cd">Favorite Hero Button</string>
     <string name="favorite_hero_error_message">Não foi possível favoritar o herói</string>
     <string name="heros">Home</string>
+    <string name="content_description_button_back">Voltar para a tela anterior</string>
+    <string name="floating_favorite_button_cd">Favorite button</string>
 </resources>

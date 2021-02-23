@@ -10,4 +10,8 @@
     <color name="tintColor">#FF9500</color>
     <color name="text_spotlight_color">#4A4A4A</color>
     <color name="text_secondary_spotlight_color">#888B90</color>
+    <color name="black_overlay60">#99000000</color>
+    <color name="black_overlay">#60000000</color>
+    <color name="grayscale_white">#FFFFFF</color>
+    <color name="red">#FF6B68</color>
 </resources>
