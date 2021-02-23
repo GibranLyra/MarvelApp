@@ -1,5 +1,5 @@
 # MarvelApp
-# CounterApp # 
+
 ## A demonstration of MVVM pattern using the trending libraries of the android world.
  
 App is based on the [Google TODO MVVM pattern](https://github.com/android/architecture-samples/tree/dev-todo-mvvm-rxjava), this pattern was choosed to make the business logic easily testable.
