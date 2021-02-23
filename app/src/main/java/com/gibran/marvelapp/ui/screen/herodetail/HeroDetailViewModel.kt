@@ -17,6 +17,9 @@ class HeroDetailViewModel(
     private val heroData = MutableLiveData<ResultState<Hero>>()
     val hero: LiveData<ResultState<Hero>> = heroData
 
+    private val favoriteData = MutableLiveData<ResultState<Hero>>()
+    val favoriteStatus: LiveData<ResultState<Hero>> = favoriteData
+
     fun fetchHeroDetail(hero: Hero) {
         heroDetailUseCase.fetchHeroDetails(hero)
             .defaultSchedulers()
@@ -28,6 +31,20 @@ class HeroDetailViewModel(
                         result.apply { action = { fetchHeroDetail(hero) } }
                     is ResultState.Error.NonRecoverableError -> heroData.value = result
                     ResultState.Loading -> heroData.value = result
+                }
+            }
+            .run { disposables.add(this) }
+    }
+
+    fun favoriteHero(hero: Hero) {
+        heroDetailUseCase.favoriteHero(hero)
+            .defaultSchedulers()
+            .subscribe { result, _ ->
+                when (result) {
+                    is ResultState.Success -> favoriteData.value = result
+                    is ResultState.Error.RecoverableError,
+                    is ResultState.Error.NonRecoverableError -> favoriteData.value = result
+                    ResultState.Loading -> favoriteData.value = result
                 }
             }
             .run { disposables.add(this) }

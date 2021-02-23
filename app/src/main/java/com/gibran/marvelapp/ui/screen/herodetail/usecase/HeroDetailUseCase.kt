@@ -16,6 +16,12 @@ class HeroDetailUseCase(private val marvelDataSource: MarvelDataSource) {
             .onErrorReturn { handleError(it) }
     }
 
+    fun favoriteHero(hero: Hero): Single<ResultState<Hero>> {
+        return marvelDataSource.favoriteHero(hero)
+            .toSingle{ ResultState.Success(hero) as ResultState<Hero>  }
+            .onErrorReturn { handleError(it) }
+    }
+
     /* Simple implementation just to show how to Handle two type of Exceptions,
 * an Recoverable Error can be a TimeOut for example */
     private fun handleError(throwable: Throwable) = when (throwable) {
