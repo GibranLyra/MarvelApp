@@ -22,7 +22,8 @@ Made one unit test and one instrumented test to show how with this architecture 
 
 ## Improvements I would make
  - Implement better theming support
- - Make Api to handle add and remove Counters
+ - Add more unitTests
+ - add more instrumented tests
  - Add splash screen
 
 ## Used Libraries
