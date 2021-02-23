@@ -24,7 +24,8 @@ class HeroDetailViewModel(
             .subscribe { result, _ ->
                 when (result) {
                     is ResultState.Success -> heroData.value = result
-                    is ResultState.Error.RecoverableError,
+                    is ResultState.Error.RecoverableError -> heroData.value =
+                        result.apply { action = { fetchHeroDetail(hero) } }
                     is ResultState.Error.NonRecoverableError -> heroData.value = result
                     ResultState.Loading -> heroData.value = result
                 }

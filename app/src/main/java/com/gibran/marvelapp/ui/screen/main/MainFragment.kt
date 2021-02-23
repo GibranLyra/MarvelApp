@@ -78,7 +78,7 @@ class MainFragment : Fragment(R.layout.main_fragment) {
         with(viewModel) {
             heroes.observe(this@MainFragment, { result ->
                 when (result) {
-                    is ResultState.Error.RecoverableError -> showLoadHeroesError()
+                    is ResultState.Error.RecoverableError -> showLoadHeroesError(result.action)
                     is ResultState.Error.NonRecoverableError -> showLoadHeroesError()
                     ResultState.Loading -> showLoading()
 
@@ -151,11 +151,12 @@ class MainFragment : Fragment(R.layout.main_fragment) {
         }
     }
 
-    private fun showLoadHeroesError() {
+    private fun showLoadHeroesError(action: (() -> Unit)? = null) {
         with(binding) {
             swipeToRefresh.isRefreshing = false
             loadingLayout.isVisible = false
             errorLayout.root.isVisible = true
+            errorLayout.tryAgainButton.setOnClickListener { action?.invoke() }
             emptyLayout.root.isVisible = false
             successGroup.isVisible = false
         }

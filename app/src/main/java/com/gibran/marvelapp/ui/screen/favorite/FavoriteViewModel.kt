@@ -27,7 +27,8 @@ internal class FavoriteViewModel(
             .subscribe { result, _ ->
                 when (result) {
                     is ResultState.Success -> heroesData.value = result
-                    is ResultState.Error.RecoverableError,
+                    is ResultState.Error.RecoverableError -> heroesData.value =
+                        result.apply { action = { fetchFavoriteHeroes() } }
                     is ResultState.Error.NonRecoverableError -> heroesData.value = result
                     ResultState.Loading -> heroesData.value = result
                 }

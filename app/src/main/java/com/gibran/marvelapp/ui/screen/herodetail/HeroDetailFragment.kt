@@ -37,12 +37,10 @@ class HeroDetailFragment : Fragment(R.layout.hero_detail_fragment) {
         with(viewModel) {
             hero.observe(this@HeroDetailFragment, { result ->
                 when (result) {
-                    is ResultState.Error.NonRecoverableError -> showLoadHeroesError()
-                    is ResultState.Error.RecoverableError -> showLoadHeroesError()
+                    is ResultState.Error.NonRecoverableError -> showHeroError()
+                    is ResultState.Error.RecoverableError -> showHeroError(result.action)
                     ResultState.Loading -> showLoading()
-                    is ResultState.Success -> {
-                        showHeroDetailsSuccess(result.data)
-                    }
+                    is ResultState.Success -> showHeroDetailsSuccess(result.data)
                 }
             })
         }
@@ -70,8 +68,12 @@ class HeroDetailFragment : Fragment(R.layout.hero_detail_fragment) {
             heroDetailContainer.isVisible = true
             favoriteFab.isVisible = true
 
-            if (hero.isFavorited) favoriteFab.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_favorite_filled))
-            else favoriteFab.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_favorite_border))
+            if (hero.isFavorited) favoriteFab.setImageDrawable(
+                ContextCompat.getDrawable(requireContext(), R.drawable.ic_favorite_filled)
+            )
+            else favoriteFab.setImageDrawable(
+                ContextCompat.getDrawable(requireContext(), R.drawable.ic_favorite_border)
+            )
 
             heroDescription.text = hero.description
             collapsingToolbarBanner.loadImage(hero.thumbnail.landscapeLargeAvatar())
@@ -88,21 +90,12 @@ class HeroDetailFragment : Fragment(R.layout.hero_detail_fragment) {
         }
     }
 
-    private fun showLoadHeroesError() {
+    private fun showHeroError(action: (() -> Unit)? = null) {
         with(binding) {
             loadingLayout.isVisible = false
             errorLayout.root.isVisible = true
+            errorLayout.tryAgainButton.setOnClickListener { action?.invoke() }
             emptyLayout.root.isVisible = false
-            heroDetailContainer.isVisible = false
-            favoriteFab.isVisible = false
-        }
-    }
-
-    private fun showEmptyState() {
-        with(binding) {
-            loadingLayout.isVisible = false
-            errorLayout.root.isVisible = false
-            emptyLayout.root.isVisible = true
             heroDetailContainer.isVisible = false
             favoriteFab.isVisible = false
         }

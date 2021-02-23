@@ -8,7 +8,6 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.gibran.marvelapp.R
 import com.gibran.marvelapp.databinding.FavoriteFragmentBinding
-import com.gibran.marvelapp.databinding.MainFragmentBinding
 import com.gibran.marvelapp.ui.component.hero.HeroListAdapter
 import com.gibran.marvelapp.util.ResultState
 import com.gibran.marvelservice.model.Hero
@@ -58,7 +57,7 @@ class FavoriteFragment : Fragment(R.layout.favorite_fragment) {
         with(viewModel) {
             heroes.observe(this@FavoriteFragment, { result ->
                 when (result) {
-                    is ResultState.Error.RecoverableError -> showLoadHeroesError()
+                    is ResultState.Error.RecoverableError -> showLoadHeroesError(result.action)
                     is ResultState.Error.NonRecoverableError -> showLoadHeroesError()
                     ResultState.Loading -> showLoading()
 
@@ -125,11 +124,12 @@ class FavoriteFragment : Fragment(R.layout.favorite_fragment) {
         }
     }
 
-    private fun showLoadHeroesError() {
+    private fun showLoadHeroesError(action: (() -> Unit)? = null) {
         with(binding) {
             swipeToRefresh.isRefreshing = false
             loadingLayout.isVisible = false
             errorLayout.root.isVisible = true
+            errorLayout.tryAgainButton.setOnClickListener { action?.invoke() }
             emptyLayout.root.isVisible = false
             successGroup.isVisible = false
         }
