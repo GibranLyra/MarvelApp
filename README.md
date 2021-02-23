@@ -6,18 +6,15 @@ App is based on the [Google TODO MVVM pattern](https://github.com/android/archit
 
 ### Some Notes
 
-I used the [MockApi.io](https://mockapi.io/) to avoid creating a local server, so the requests will work but the values will not be saved remotely.
-
 I created a exclusive module exclusively to demonstrate a way to let the service be totally decoupled from the app. That helps when the service is the same in multiple front ends.
-
 
 
 ## Tests
 Made one unit test and one instrumented test to show how with this architecture we make things easier to test.
 
- - Unit tests under [test folder](https://github.com/GibranLyra/CounterApp/tree/master/app/src/test/java/com/example/counterapp/ui/screen/main)
+ - Unit tests under [test folder](https://github.com/GibranLyra/MarvelApp/tree/main/app/src/test/java/com/gibran/marvelapp)
 
- - Instrumentation test under [androidtests folder](https://github.com/GibranLyra/CounterApp/tree/master/app/src/androidTest/java/com/example/counterapp/ui/screen/mainfragment)
+ - Instrumentation test under [androidtests folder](https://github.com/GibranLyra/MarvelApp/tree/main/app/src/androidTest/java/com/gibran/marvelapp)
 
 
 ## Improvements I would make
