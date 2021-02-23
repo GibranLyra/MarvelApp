@@ -9,7 +9,7 @@ import java.net.ConnectException
 import java.net.SocketException
 import java.net.UnknownHostException
 
-class MarvelHeroesUseCase(private val marvelDataSource: MarvelDataSource) {
+class HeroesUseCase(private val marvelDataSource: MarvelDataSource) {
 
     fun fetchHeroes(): Single<ResultState<List<Hero>>> {
         return marvelDataSource.heroes()

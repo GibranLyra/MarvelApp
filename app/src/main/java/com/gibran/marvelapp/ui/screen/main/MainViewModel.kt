@@ -5,13 +5,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.gibran.marvelapp.ext.defaultSchedulers
 import com.gibran.marvelapp.ui.base.BaseViewModel
-import com.gibran.marvelapp.ui.screen.main.usecase.MarvelHeroesUseCase
+import com.gibran.marvelapp.ui.screen.main.usecase.HeroesUseCase
 import com.gibran.marvelapp.util.ResultState
 import com.gibran.marvelservice.model.Hero
 
 internal class MainViewModel(
     application: Application,
-    private val marvelHeroesUseCase: MarvelHeroesUseCase
+    private val heroesUseCase: HeroesUseCase
 ) : BaseViewModel(application) {
 
     private val heroesData = MutableLiveData<ResultState<List<Hero>>>()
@@ -21,7 +21,7 @@ internal class MainViewModel(
     val favoriteStatus: LiveData<ResultState<Hero>> = favoriteData
 
     internal fun fetchHeroes() {
-        marvelHeroesUseCase.fetchHeroes()
+        heroesUseCase.fetchHeroes()
             .defaultSchedulers()
             .doOnSubscribe { heroesData.value = ResultState.Loading }
             .subscribe { result, _ ->
@@ -52,7 +52,7 @@ internal class MainViewModel(
     }
 
     fun favoriteHero(hero: Hero) {
-        marvelHeroesUseCase.favoriteHero(hero)
+        heroesUseCase.favoriteHero(hero)
             .defaultSchedulers()
             .subscribe { result, _ ->
                 when (result) {

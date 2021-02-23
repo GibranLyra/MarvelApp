@@ -60,8 +60,8 @@ class MarvelRepository(
 
     private fun refreshMemoryCache(heroes: List<Hero>) {
         cachedHeroes.clear()
-        heroes.forEachIndexed { index, counter ->
-            cachedHeroes[index] = counter
+        heroes.forEachIndexed { index, hero ->
+            cachedHeroes[index] = hero
         }
         cacheIsDirty = false
     }

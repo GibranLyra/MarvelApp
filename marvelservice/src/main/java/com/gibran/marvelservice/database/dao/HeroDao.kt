@@ -12,7 +12,7 @@ interface HeroDao {
     fun heroes(): Single<List<Hero>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun saveHeroes(counter: List<Hero>): Completable
+    fun saveHeroes(heroes: List<Hero>): Completable
 
     @Update
     fun favoriteHero(hero: Hero): Completable
