@@ -1,14 +1,15 @@
-package com.gibran.marvelapp
+package com.gibran.marvelapp.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.Navigation
+import androidx.core.view.isVisible
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
+import com.gibran.marvelapp.R
 import com.gibran.marvelapp.databinding.MainActivityBinding
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), BottomBar {
     private var _binding: MainActivityBinding? = null
     private val binding get() = _binding!!
 
@@ -23,5 +24,9 @@ class MainActivity : AppCompatActivity() {
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
         val navController = navHostFragment.navController
         NavigationUI.setupWithNavController(binding.bottomNavigation, navController)
+    }
+
+    override fun showBottomNavigation(isVisible: Boolean) {
+        binding.bottomNavigation.isVisible = isVisible
     }
 }

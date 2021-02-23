@@ -1,5 +1,6 @@
 package com.gibran.marvelapp.ui.screen.herodetail
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +13,7 @@ import com.gibran.marvelapp.R
 import com.gibran.marvelapp.databinding.HeroDetailFragmentBinding
 import com.gibran.marvelapp.ext.landscapeLargeAvatar
 import com.gibran.marvelapp.ext.loadImage
+import com.gibran.marvelapp.ui.BottomBar
 import com.gibran.marvelapp.util.ResultState
 import com.gibran.marvelservice.model.Hero
 import com.google.android.material.snackbar.Snackbar
@@ -32,6 +34,16 @@ class HeroDetailFragment : Fragment(R.layout.hero_detail_fragment) {
         super.onCreate(savedInstanceState)
         hero = args.heroArgs
         initViewModel()
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (requireActivity() is BottomBar) (requireActivity() as BottomBar).showBottomNavigation(false)
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        if (requireActivity() is BottomBar) (requireActivity() as BottomBar).showBottomNavigation(true)
     }
 
     private fun initViewModel() {
